@@ -145,7 +145,7 @@ private protocol _FileHandleable {
 extension FileHandle: _FileHandleable {
     func seek(to fileOffset: Int) throws {
         let offset = UInt64(fileOffset)
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0,tvOS 13.0, *) {
             try seek(toOffset: offset)
         } else {
             seek(toFileOffset: offset)
@@ -154,7 +154,7 @@ extension FileHandle: _FileHandleable {
 
     func writeData(_ data: Data, to range: NSRange) throws {
         try seek(to: range.location)
-        if #available(iOS 13.4, *) {
+        if #available(iOS 13.4,tvOS 13.4, *) {
             try write(contentsOf: data)
         } else {
             write(data)
@@ -164,7 +164,7 @@ extension FileHandle: _FileHandleable {
     func readData(from range: NSRange) throws -> Data? {
         try seek(to: range.location)
         let length = range.length
-        if #available(iOS 13.4, *) {
+        if #available(iOS 13.4,tvOS 13.4, *) {
             return try read(upToCount: length)
         } else {
             return readData(ofLength: length)
@@ -173,7 +173,7 @@ extension FileHandle: _FileHandleable {
 
     func truncate(at fileOffset: Int) throws {
         let offset = UInt64(fileOffset)
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0,tvOS 13.0, *) {
             try truncate(atOffset: offset)
         } else {
             truncateFile(atOffset: offset)
@@ -181,7 +181,7 @@ extension FileHandle: _FileHandleable {
     }
 
     func save() throws {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0,tvOS 13.0, *) {
             try synchronize()
         } else {
             synchronizeFile()
@@ -189,7 +189,7 @@ extension FileHandle: _FileHandleable {
     }
 
     func closeHandle() throws {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0,tvOS 13.0, *) {
             try close()
         } else {
             closeFile()

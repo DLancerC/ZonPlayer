@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "ZonPlayer",
-    platforms: [.iOS(.v12)],
+    platforms: [.iOS(.v12),.tvOS(.v12)],
     products: [
         .library(name: "ZonPlayer", targets: ["ZonPlayer"]),
     ],
